@@ -1,0 +1,22 @@
+version: '3'
+
+services: 
+  web:
+    build:
+      context: /home/linus/Documents/njs_react_app/frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - '3000:3000'
+    volumes: 
+      - /home/node/app/node_modules
+      - /home/linus/Documents/njs_react_app/frontend:/home/node/app
+
+  tests:
+    stdin_open: true
+    build:
+      context: /home/linus/Documents/njs_react_app/frontend
+      dockerfile: Dockerfile.dev
+    volumes: 
+      - /home/node/app/node_modules
+      - /home/linus/Documents/njs_react_app/frontend:/home/node/app
+    command: ["npm","run","test"]
